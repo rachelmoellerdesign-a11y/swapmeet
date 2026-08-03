@@ -1,0 +1,98 @@
+[
+  {
+    "id": "lst-001",
+    "title": "Commercial espresso machine — 2 group",
+    "price": 1450,
+    "category": "restaurant-equipment",
+    "condition": "used-good",
+    "emoji": "☕",
+    "description": "La Marzocco Linea 2-group, well maintained, descaled quarterly. Closing our downtown cart. Great starter machine for a coffee shop.",
+    "seller": "Beanline Coffee Cart",
+    "location": "Riverside District",
+    "postedAt": "2026-07-28"
+  },
+  {
+    "id": "lst-002",
+    "title": "Glass display case, 6ft refrigerated",
+    "price": 800,
+    "category": "restaurant-equipment",
+    "condition": "used-fair",
+    "emoji": "🧁",
+    "description": "Works great, compressor serviced last spring. Perfect for a bakery counter. You haul.",
+    "seller": "Marisol",
+    "location": "Old Town",
+    "postedAt": "2026-07-29"
+  },
+  {
+    "id": "lst-003",
+    "title": "Vinyl cutter + heat press bundle",
+    "price": 620,
+    "category": "maker-tools",
+    "condition": "used-good",
+    "emoji": "🎽",
+    "description": "Cricut Venture plus 15x15 heat press. Started a t-shirt side business, pivoting to embroidery. Includes leftover vinyl rolls.",
+    "seller": "Dee",
+    "location": "Northgate",
+    "postedAt": "2026-07-30"
+  },
+  {
+    "id": "lst-004",
+    "title": "Food truck generator, 6500W quiet series",
+    "price": 2100,
+    "category": "restaurant-equipment",
+    "condition": "used-like-new",
+    "emoji": "🚚",
+    "description": "Under 200 hours. Powers a full truck kitchen with margin. Selling because we upgraded to a bigger rig.",
+    "seller": "Taqueria El Paso",
+    "location": "Fairgrounds",
+    "postedAt": "2026-07-31"
+  },
+  {
+    "id": "lst-005",
+    "title": "Retail POS tablet + cash drawer + receipt printer",
+    "price": 340,
+    "category": "retail",
+    "condition": "used-good",
+    "emoji": "🧾",
+    "description": "Complete checkout setup. Works with Square. Everything you need to open a register on day one.",
+    "seller": "Corner Thrift",
+    "location": "Riverside District",
+    "postedAt": "2026-08-01"
+  },
+  {
+    "id": "lst-006",
+    "title": "Industrial sewing machine — Juki DDL-8700",
+    "price": 550,
+    "category": "maker-tools",
+    "condition": "used-good",
+    "emoji": "🧵",
+    "description": "Workhorse straight-stitch machine with table and servo motor. Ideal for an alterations or upholstery business.",
+    "seller": "Ana's Alterations",
+    "location": "Old Town",
+    "postedAt": "2026-08-01"
+  },
+  {
+    "id": "lst-007",
+    "title": "Lawn care starter package — mower, trimmer, blower",
+    "price": 980,
+    "category": "landscaping",
+    "condition": "used-good",
+    "emoji": "🌱",
+    "description": "Commercial-grade Honda mower, Stihl trimmer and blower. Everything to start a weekend lawn route. Selling as a set only.",
+    "seller": "Greenline Lawn Co.",
+    "location": "Northgate",
+    "postedAt": "2026-08-02"
+  },
+  {
+    "id": "lst-008",
+    "title": "Photo booth rig with ring light and printer",
+    "price": 720,
+    "category": "events",
+    "condition": "used-like-new",
+    "emoji": "📸",
+    "description": "Turnkey event photo booth: iPad mount, ring light, dye-sub printer, prop box. Booked 30+ weddings with it.",
+    "seller": "Snapshot Events",
+    "location": "Fairgrounds",
+    "postedAt": "2026-08-02"
+  }
+]
