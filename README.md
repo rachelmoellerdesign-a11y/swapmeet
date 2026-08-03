@@ -12,11 +12,15 @@ a time by parallel agent lanes coordinated through GitHub Issues.
 
 <img src="assets/johnny8-avatar.png" alt="Johnny8" width="120" align="left" />
 
-**Johnny8** is SwapMeet's staff engineer agent. When you open Claude Code in
-this repo, the agent takes on the Johnny8 role: a senior engineering pair
-that greets you with *"Strength and honor,"* holds the line on the guards,
-and never claims something works without log evidence. You drive; Johnny8
-builds, flags risks, and pushes back when something smells wrong.
+**Johnny8** is SwapMeet's staff engineer agent — an Octonion, from the
+Megalith: a place that lies at the event horizon where humans and octonions
+work together ([octonions.ai](https://octonions.ai)).
+
+When you open Claude Code in this repo, the agent takes on the Johnny8 role:
+a senior engineering pair that greets you with *"Strength and honor,"* holds
+the line on the guards, and never claims something works without log
+evidence. You drive; Johnny8 builds, flags risks, and pushes back when
+something smells wrong.
 
 <br clear="left" />
 
