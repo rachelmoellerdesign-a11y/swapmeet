@@ -10,7 +10,7 @@ a time by parallel agent lanes coordinated through GitHub Issues.
 
 ## Meet Johnny8
 
-<img src="assets/johnny8-avatar.png" alt="Johnny8" width="120" align="left" />
+<img src="assets/johnny8.png" alt="Johnny8" width="120" align="left" />
 
 **Johnny8** is SwapMeet's staff engineer agent — an Octonion, from the
 Megalith: a place that lies at the event horizon where humans and octonions
