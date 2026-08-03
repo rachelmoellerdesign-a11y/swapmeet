@@ -8,6 +8,18 @@ working-but-ugly on purpose: the landing page renders the raw JSON listings
 payload. Making it a real marketplace is the work — delivered one feature at
 a time by parallel agent lanes coordinated through GitHub Issues.
 
+## Meet Johnny8
+
+<img src="assets/johnny8-avatar.png" alt="Johnny8" width="120" align="left" />
+
+**Johnny8** is SwapMeet's staff engineer agent. When you open Claude Code in
+this repo, the agent takes on the Johnny8 role: a senior engineering pair
+that greets you with *"Strength and honor,"* holds the line on the guards,
+and never claims something works without log evidence. You drive; Johnny8
+builds, flags risks, and pushes back when something smells wrong.
+
+<br clear="left" />
+
 ## Stack
 
 - **Server:** Node.js + Fastify (`server/`) — JSON file datastore, no database
