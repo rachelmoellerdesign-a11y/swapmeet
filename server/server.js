@@ -20,8 +20,27 @@ app.get('/api/health', async () => ({ status: 'ok', service: 'swapmeet-api' }))
 
 app.get('/api/listings', async (request) => {
   const listings = await loadListings()
-  request.log.info({ count: listings.length }, 'served listings')
-  return listings
+  const { category } = request.query
+  const result = category ? listings.filter((l) => l.category === category) : listings
+  request.log.info({ count: result.length, category: category ?? null }, 'served listings')
+  return result
+})
+
+app.get('/api/categories', async (request) => {
+  const listings = await loadListings()
+  const counts = new Map()
+  for (const { category } of listings) {
+    counts.set(category, (counts.get(category) ?? 0) + 1)
+  }
+  const categories = [...counts.entries()]
+    .map(([id, count]) => ({
+      id,
+      label: id.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '),
+      count
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label))
+  request.log.info({ count: categories.length }, 'served categories')
+  return categories
 })
 
 app.get('/api/listings/:id', async (request, reply) => {
