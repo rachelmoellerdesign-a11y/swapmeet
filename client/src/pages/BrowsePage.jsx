@@ -2,19 +2,18 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { getCategories, getListings } from '../api/client'
 import { CONDITION_LABELS, formatPrice } from '../api/types'
-import type { Category, Listing } from '../api/types'
 import CategoryFilter from '../components/CategoryFilter'
 import { ItemCard } from '../design-system'
 
 export default function BrowsePage() {
   const [params, setParams] = useSearchParams()
   const category = params.get('category')
-  const [categories, setCategories] = useState<Category[]>([])
-  const [listings, setListings] = useState<Listing[] | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [categories, setCategories] = useState([])
+  const [listings, setListings] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    getCategories().then(setCategories).catch((e: Error) => setError(e.message))
+    getCategories().then(setCategories).catch((e) => setError(e.message))
   }, [])
 
   useEffect(() => {
@@ -22,10 +21,10 @@ export default function BrowsePage() {
     setError(null)
     getListings(category ?? undefined)
       .then(setListings)
-      .catch((e: Error) => setError(e.message))
+      .catch((e) => setError(e.message))
   }, [category])
 
-  const labelFor = (id: string) => categories.find((c) => c.id === id)?.label ?? id
+  const labelFor = (id) => categories.find((c) => c.id === id)?.label ?? id
 
   return (
     <div className="flex flex-col gap-6">

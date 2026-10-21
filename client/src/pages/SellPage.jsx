@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createListing, getCategories, ValidationFailed } from '../api/client'
 import { CONDITION_LABELS } from '../api/types'
-import type { Category, Condition, NewListing } from '../api/types'
 import { Button } from '../design-system'
 
-type Field = keyof NewListing
-type FormState = Record<Field, string>
-
-const EMPTY: FormState = {
+const EMPTY = {
   title: '', price: '', category: '', condition: '', description: '', seller: '', location: '', emoji: ''
 }
 
@@ -19,20 +14,20 @@ const control =
 
 export default function SellPage() {
   const navigate = useNavigate()
-  const [form, setForm] = useState<FormState>(EMPTY)
-  const [errors, setErrors] = useState<Partial<Record<Field, string>>>({})
-  const [formError, setFormError] = useState<string | null>(null)
+  const [form, setForm] = useState(EMPTY)
+  const [errors, setErrors] = useState({})
+  const [formError, setFormError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
-  const [categories, setCategories] = useState<Category[]>([])
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     getCategories().then(setCategories).catch(() => setCategories([]))
   }, [])
 
-  const set = (field: Field) => (e: { target: { value: string } }) =>
+  const set = (field) => (e) =>
     setForm((f) => ({ ...f, [field]: e.target.value }))
 
-  async function onSubmit(e: FormEvent) {
+  async function onSubmit(e) {
     e.preventDefault()
     setSubmitting(true)
     setErrors({})
@@ -44,27 +39,27 @@ export default function SellPage() {
       emoji: form.emoji.trim() === '' ? undefined : form.emoji
     }
     try {
-      const created = await createListing(payload as unknown as NewListing)
+      const created = await createListing(payload)
       navigate(`/listings/${created.id}`)
     } catch (err) {
       if (err instanceof ValidationFailed) {
         setErrors(Object.fromEntries(err.details.map((d) => [d.field, d.message])))
       } else {
-        setFormError((err as Error).message)
+        setFormError(err.message)
       }
     } finally {
       setSubmitting(false)
     }
   }
 
-  const field = (name: Field, label: string, input: React.ReactNode) => (
+  const field = (name, label, input) => (
     <div className="flex flex-col gap-1">
       <label htmlFor={name} className="font-bold text-fg">{label}</label>
       {input}
       {errors[name] && <p id={`${name}-error`} className="text-sm font-bold text-danger">{errors[name]}</p>}
     </div>
   )
-  const aria = (name: Field) => ({
+  const aria = (name) => ({
     id: name,
     'aria-invalid': errors[name] ? true : undefined,
     'aria-describedby': errors[name] ? `${name}-error` : undefined
@@ -86,7 +81,7 @@ export default function SellPage() {
       {field('condition', 'Condition',
         <select {...aria('condition')} className={control} value={form.condition} onChange={set('condition')}>
           <option value="">Choose a condition</option>
-          {(Object.keys(CONDITION_LABELS) as Condition[]).map((c) => <option key={c} value={c}>{CONDITION_LABELS[c]}</option>)}
+          {Object.keys(CONDITION_LABELS).map((c) => <option key={c} value={c}>{CONDITION_LABELS[c]}</option>)}
         </select>
       )}
       {field('description', 'Description', <textarea {...aria('description')} className={control} rows={5} value={form.description} onChange={set('description')} />)}

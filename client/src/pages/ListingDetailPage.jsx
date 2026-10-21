@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ApiError, getCategories, getListing } from '../api/client'
 import { CONDITION_LABELS, formatPrice } from '../api/types'
-import type { Category, Listing } from '../api/types'
 import { Badge } from '../design-system'
 
-type State = { status: 'loading' } | { status: 'notFound' } | { status: 'error'; message: string } | { status: 'ok'; listing: Listing }
-
+// state.status: 'loading' | 'notFound' | 'error' | 'ok' (with listing)
 export default function ListingDetailPage() {
   const { id = '' } = useParams()
-  const [state, setState] = useState<State>({ status: 'loading' })
-  const [categories, setCategories] = useState<Category[]>([])
+  const [state, setState] = useState({ status: 'loading' })
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     getCategories().then(setCategories).catch(() => setCategories([]))
@@ -20,7 +18,7 @@ export default function ListingDetailPage() {
     setState({ status: 'loading' })
     getListing(id)
       .then((listing) => setState({ status: 'ok', listing }))
-      .catch((e: Error) =>
+      .catch((e) =>
         setState(e instanceof ApiError && e.status === 404 ? { status: 'notFound' } : { status: 'error', message: e.message })
       )
   }, [id])

@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { Icon } from '../design-system'
 import ThemeToggle from './ThemeToggle'
 
-const navClass = ({ isActive }: { isActive: boolean }) =>
+const navClass = ({ isActive }) =>
   'inline-flex items-center gap-2 rounded-token-md px-3 py-2 font-sans font-bold text-fg ' +
   (isActive ? 'bg-panel' : 'hover:bg-panel')
 

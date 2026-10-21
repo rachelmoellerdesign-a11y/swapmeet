@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../design-system'
 
-type Theme = 'light' | 'dark'
-
 const STORAGE_KEY = 'swapmeet-theme'
 
-function initialTheme(): Theme {
+function initialTheme() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved === 'light' || saved === 'dark') return saved
@@ -16,7 +14,7 @@ function initialTheme(): Theme {
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(initialTheme)
+  const [theme, setTheme] = useState(initialTheme)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -27,7 +25,7 @@ export default function ThemeToggle() {
     }
   }, [theme])
 
-  const next: Theme = theme === 'dark' ? 'light' : 'dark'
+  const next = theme === 'dark' ? 'light' : 'dark'
   return (
     <Button
       variant="tertiary"
