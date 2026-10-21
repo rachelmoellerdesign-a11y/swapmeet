@@ -1,49 +1,21 @@
-import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Header from './components/Header'
+import BrowsePage from './pages/BrowsePage'
+import ListingDetailPage from './pages/ListingDetailPage'
+import SellPage from './pages/SellPage'
 
-// v0: SwapMeet works, but it's not pretty. The landing page renders the raw
-// listings payload straight from the API. Turning this into a real listings
-// page is the feature you'll deliver using parallel lanes.
 export default function App() {
-  const [listings, setListings] = useState<unknown[] | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    fetch('/api/listings')
-      .then((res) => {
-        if (!res.ok) throw new Error(`API responded ${res.status}`)
-        return res.json()
-      })
-      .then(setListings)
-      .catch((err) => setError(err.message))
-  }, [])
-
   return (
-    <main style={{ fontFamily: 'sans-serif', maxWidth: 900, margin: '2rem auto', padding: '0 1rem' }}>
-      <h1>🛒 SwapMeet</h1>
-      <p>Local listings for people building something.</p>
-
-      {error && <p style={{ color: 'crimson' }}>Failed to load listings: {error}</p>}
-      {!error && !listings && <p>Loading listings…</p>}
-
-      {listings && (
-        <>
-          <p>
-            <strong>{listings.length}</strong> listings live. Raw payload below — your job is to make
-            this beautiful.
-          </p>
-          <pre
-            style={{
-              background: '#f4f4f4',
-              padding: '1rem',
-              borderRadius: 8,
-              overflowX: 'auto',
-              fontSize: 13
-            }}
-          >
-            {JSON.stringify(listings, null, 2)}
-          </pre>
-        </>
-      )}
-    </main>
+    <>
+      <Header />
+      <main className="mx-auto max-w-6xl px-4 py-8 font-sans">
+        <Routes>
+          <Route path="/" element={<BrowsePage />} />
+          <Route path="/listings/:id" element={<ListingDetailPage />} />
+          <Route path="/sell" element={<SellPage />} />
+          <Route path="*" element={<p className="text-muted">Page not found.</p>} />
+        </Routes>
+      </main>
+    </>
   )
 }
