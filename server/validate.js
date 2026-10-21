@@ -1,31 +1,14 @@
-import { CATEGORIES, CONDITIONS, type CategoryId, type Condition } from './categories.js'
-
-export interface NewListing {
-  title: string
-  price: number
-  category: CategoryId
-  condition: Condition
-  description: string
-  seller: string
-  location: string
-  emoji?: string
-}
-
-export interface FieldError {
-  field: keyof NewListing
-  message: string
-}
+import { CATEGORIES, CONDITIONS } from './categories.js'
 
 export const DEFAULT_EMOJI = '📦'
 
-type Result = { ok: true; value: Required<NewListing> } | { ok: false; details: FieldError[] }
-
 // Validates a POST body. Reports every failing field, drops unknown fields.
-export function validateNewListing(body: unknown): Result {
-  const input = (body && typeof body === 'object' ? body : {}) as Record<string, unknown>
-  const details: FieldError[] = []
+// Returns { ok: true, value } or { ok: false, details: [{ field, message }] }.
+export function validateNewListing(body) {
+  const input = body && typeof body === 'object' ? body : {}
+  const details = []
 
-  const text = (field: 'title' | 'description' | 'seller' | 'location', min: number, max: number) => {
+  const text = (field, min, max) => {
     const raw = input[field]
     if (typeof raw !== 'string') {
       details.push({ field, message: `${field} is required` })
@@ -51,7 +34,7 @@ export function validateNewListing(body: unknown): Result {
   }
 
   const condition = input.condition
-  if (!CONDITIONS.includes(condition as Condition)) {
+  if (!CONDITIONS.includes(condition)) {
     details.push({ field: 'condition', message: `condition must be one of ${CONDITIONS.join(', ')}` })
   }
 
@@ -73,9 +56,9 @@ export function validateNewListing(body: unknown): Result {
     ok: true,
     value: {
       title,
-      price: price as number,
-      category: category as CategoryId,
-      condition: condition as Condition,
+      price,
+      category,
+      condition,
       description,
       seller,
       location,

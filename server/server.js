@@ -14,7 +14,7 @@ const app = Fastify({ logger: true })
 
 app.get('/api/health', async () => ({ status: 'ok', service: 'swapmeet-api' }))
 
-app.get<{ Querystring: { category?: string } }>('/api/listings', async (request) => {
+app.get('/api/listings', async (request) => {
   const { category } = request.query
   const all = await readListings()
   const listings = (category ? all.filter((l) => l.category === category) : all).sort(
@@ -25,7 +25,7 @@ app.get<{ Querystring: { category?: string } }>('/api/listings', async (request)
   return listings
 })
 
-app.get<{ Params: { id: string } }>('/api/listings/:id', async (request, reply) => {
+app.get('/api/listings/:id', async (request, reply) => {
   const listings = await readListings()
   const listing = listings.find((l) => l.id === request.params.id)
   if (!listing) {

@@ -1,37 +1,22 @@
 import { readFile, writeFile, rename } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { CategoryId, Condition } from './categories.js'
-import type { NewListing } from './validate.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_FILE = path.join(__dirname, '..', 'data', 'listings.json')
 
-export interface Listing {
-  id: string
-  title: string
-  price: number
-  category: CategoryId
-  condition: Condition
-  emoji: string
-  description: string
-  seller: string
-  location: string
-  postedAt: string
-}
-
-export async function readListings(): Promise<Listing[]> {
+export async function readListings() {
   return JSON.parse(await readFile(DATA_FILE, 'utf8'))
 }
 
 // Appends are queued so concurrent POSTs never interleave their read-modify-write.
-let queue: Promise<unknown> = Promise.resolve()
+let queue = Promise.resolve()
 
-export function appendListing(input: Required<NewListing>): Promise<Listing> {
+export function appendListing(input) {
   const run = queue.then(async () => {
     const listings = await readListings()
     const maxId = listings.reduce((max, l) => Math.max(max, Number(l.id.replace('lst-', '')) || 0), 0)
-    const listing: Listing = {
+    const listing = {
       id: `lst-${String(maxId + 1).padStart(3, '0')}`,
       ...input,
       postedAt: new Date().toISOString().slice(0, 10),
