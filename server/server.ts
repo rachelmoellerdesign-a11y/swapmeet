@@ -11,7 +11,20 @@ const CLIENT_DIST = path.join(__dirname, '..', 'client', 'dist')
 
 const app = Fastify({ logger: true })
 
-async function loadListings() {
+interface Listing {
+  id: string
+  title: string
+  price: number
+  category: string
+  condition: string
+  emoji: string
+  description: string
+  seller: string
+  location: string
+  postedAt: string
+}
+
+async function loadListings(): Promise<Listing[]> {
   const raw = await readFile(DATA_FILE, 'utf8')
   return JSON.parse(raw)
 }
@@ -24,7 +37,7 @@ app.get('/api/listings', async (request) => {
   return listings
 })
 
-app.get('/api/listings/:id', async (request, reply) => {
+app.get<{ Params: { id: string } }>('/api/listings/:id', async (request, reply) => {
   const listings = await loadListings()
   const listing = listings.find((l) => l.id === request.params.id)
   if (!listing) {
